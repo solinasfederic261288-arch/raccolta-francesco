@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Nessun tracciamento, nessuno script esterno: tutto viene da questa cartella. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <title>Aiutiamo Francesco ad arrivare a Firenze</title>
+  <meta name="description" content="Francesco ha 19 anni ed è il secondo caso in Sardegna di condrosarcoma a cellule chiare. Raccogliamo 754 € per il suo viaggio a Firenze con la famiglia.">
+  <meta name="theme-color" content="#1d5a66">
+  <!-- Anteprima quando il link viene condiviso (WhatsApp, Facebook...) -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:title" content="Aiutiamo Francesco ad arrivare a Firenze">
+  <meta property="og:description" content="Raccogliamo 754 € per il viaggio a Firenze di Francesco, 19 anni, e della sua famiglia.">
+  <meta property="og:url" content="https://solinasfederic261288-arch.github.io/raccolta-francesco/">
+  <meta property="og:image" content="https://solinasfederic261288-arch.github.io/raccolta-francesco/images/francesco.jpg">
+  <meta property="og:image:width" content="720">
+  <meta property="og:image:height" content="1219">
+  <meta property="og:image:alt" content="Francesco, 19 anni">
+  <link rel="canonical" href="https://solinasfederic261288-arch.github.io/raccolta-francesco/">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%99%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#storia">Vai al contenuto</a>
+
+  <header class="hero">
+    <div class="wrap hero-grid">
+
+      <div class="hero-titolo">
+        <p class="eyebrow">Raccolta fondi · Sardegna → Firenze</p>
+        <h1>Aiutiamo Francesco ad arrivare a Firenze</h1>
+      </div>
+
+      <figure class="foto" id="foto-francesco">
+        <!-- FOTO DI FRANCESCO: per cambiarla basta sostituire il file images/francesco.jpg
+             (meglio verticale, circa 720 px di larghezza). Il ritaglio si regola in styles.css (.foto img → object-position). -->
+        <img src="images/francesco.jpg" width="720" height="1219" alt="Francesco, 19 anni, al volante con gli occhiali da sole" fetchpriority="high">
+      </figure>
+
+      <div class="hero-corpo">
+        <p class="lead">Francesco ha 19 anni ed è il secondo caso in Sardegna di condrosarcoma a cellule chiare, un tumore raro e maligno. Per curarsi deve andare a Firenze. Raccogliamo <strong>754&nbsp;€</strong> per il viaggio suo e della sua famiglia.</p>
+
+        <div class="progresso" aria-labelledby="prog-titolo">
+          <h2 id="prog-titolo" class="sr-only">Avanzamento della raccolta</h2>
+          <p class="prog-cifre">
+            <span class="prog-raccolto" id="raccolto">0 €</span>
+            <span class="prog-obiettivo">raccolti su <span id="obiettivo">754 €</span></span>
+          </p>
+          <div class="barra" id="barra" role="progressbar" aria-valuemin="0" aria-valuemax="754" aria-valuenow="0" aria-label="Euro raccolti">
+            <div class="barra-riempimento" id="barra-riempimento"></div>
+          </div>
+          <p class="prog-nota"><span id="percentuale">0%</span> · <span id="mancano">mancano 754 €</span><span id="aggiornato"></span></p>
+        </div>
+
+        <div class="cta">
+          <a class="btn btn-primario" href="#dona">Dona ora</a>
+          <a class="btn btn-secondario" href="#condividi">Condividi</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="storia" class="sezione">
+      <div class="wrap stretto">
+        <h2>Perché questa raccolta</h2>
+        <p>Mi chiamo Federico e vivo in Sardegna. Sono stato il primo caso in Sardegna di condrosarcoma a cellule chiare, un tumore osseo raro e maligno. Per curarmi sono andato a Firenze e ho affrontato tutte le spese da solo.</p>
+        <p>Oggi c'è un secondo caso nella nostra isola: è Francesco, ha 19 anni. Anche lui deve andare a Firenze per curarsi, ma lui e la sua famiglia non possono permettersi il viaggio.</p>
+        <p>Io quella strada l'ho già fatta, e so quanto pesa doverla organizzare. Per questo ho deciso di chiedere una mano a chi può darla.</p>
+        <p class="evidenza">La raccolta serve a una sola cosa: pagare il viaggio a Firenze di Francesco e della sua famiglia. L'obiettivo è <strong>754&nbsp;€</strong>.</p>
+        <p>Ogni contributo, anche piccolo, conta. E se in questo momento non puoi donare, condividere questa pagina è già un aiuto enorme.</p>
+        <p>Grazie di cuore.</p>
+        <p class="firma">— Federico</p>
+        <p class="nota-privacy">Francesco ha accettato di comparire con il suo nome e la sua foto. Per rispetto della loro riservatezza, la sua famiglia resta anonima.</p>
+      </div>
+    </section>
+
+    <section id="dona" class="sezione sezione-chiara">
+      <div class="wrap stretto">
+        <h2>Come donare</h2>
+        <p>Le donazioni arrivano a me, Federico. A raccolta conclusa farò un unico bonifico a Francesco e pubblicherò qui la ricevuta (vedi <a href="#trasparenza">Trasparenza</a>).</p>
+
+        <p>Puoi fare un bonifico su uno dei due conti qui sotto: sono entrambi intestati a me. Va bene quello che ti è più comodo.</p>
+
+        <div class="card" id="card-banca">
+          <h3><span aria-hidden="true">🏦</span> <span id="titolo-banca">Bonifico bancario</span></h3>
+          <dl class="dati">
+            <div>
+              <dt>Intestatario</dt>
+              <dd data-campo="intestatario">[INTESTATARIO DA INSERIRE]</dd>
+            </div>
+            <div>
+              <dt>IBAN</dt>
+              <dd class="iban-riga">
+                <span id="iban" class="iban" data-campo="iban">[IBAN DA INSERIRE]</span>
+                <button type="button" class="btn btn-piccolo" data-copia="iban" aria-describedby="iban">Copia IBAN</button>
+              </dd>
+            </div>
+            <div>
+              <dt>Causale</dt>
+              <dd class="iban-riga">
+                <span id="causale" data-campo="causale">[CAUSALE DA INSERIRE]</span>
+                <button type="button" class="btn btn-piccolo btn-leggero" data-copia="causale" aria-describedby="causale">Copia</button>
+              </dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="card" id="card-revolut">
+          <h3><span aria-hidden="true">🏦</span> <span id="titolo-revolut">Bonifico sul conto Revolut</span></h3>
+          <dl class="dati">
+            <div>
+              <dt>Intestatario</dt>
+              <dd data-campo="intestatario">[INTESTATARIO DA INSERIRE]</dd>
+            </div>
+            <div>
+              <dt>IBAN</dt>
+              <dd class="iban-riga">
+                <span id="iban-revolut" class="iban" data-campo="ibanRevolut">[IBAN REVOLUT DA INSERIRE]</span>
+                <button type="button" class="btn btn-piccolo" data-copia="ibanRevolut" aria-describedby="iban-revolut">Copia IBAN</button>
+              </dd>
+            </div>
+            <div>
+              <dt>Causale</dt>
+              <dd class="iban-riga">
+                <span id="causale-revolut" data-campo="causale">[CAUSALE DA INSERIRE]</span>
+                <button type="button" class="btn btn-piccolo btn-leggero" data-copia="causale" aria-describedby="causale-revolut">Copia</button>
+              </dd>
+            </div>
+          </dl>
+          <!-- Pulsante opzionale: compare solo se in config.js revolutLink contiene un link valido -->
+          <a class="btn btn-primario btn-pieno btn-revolut" id="revolut-link" href="#dona" rel="noopener noreferrer" target="_blank" hidden>Dona con Revolut</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="trasparenza" class="sezione">
+      <div class="wrap stretto">
+        <h2>Trasparenza</h2>
+        <p>Voglio che sia chiaro a tutti dove vanno i soldi.</p>
+        <ol class="passi">
+          <li><strong>Doni a Federico</strong> con un bonifico su uno dei suoi due conti.</li>
+          <li><strong>Aggiorno il contatore</strong> su questa pagina man mano che arrivano le donazioni.</li>
+          <li><strong>Faccio un unico bonifico a Francesco</strong> per il viaggio a Firenze.</li>
+          <li><strong>Pubblico qui la ricevuta</strong> del bonifico, così chiunque può verificarlo.</li>
+        </ol>
+
+        <div class="ricevuta" id="ricevuta">
+          <!-- RICEVUTA: salva l'immagine come images/ricevuta.jpg e metti ricevutaPubblicata: true in config.js -->
+          <div class="ricevuta-attesa" id="ricevuta-attesa">
+            <span aria-hidden="true">🧾</span>
+            <p><strong>Ricevuta del bonifico: in arrivo</strong></p>
+            <p>La pubblicherò qui appena avrò fatto il bonifico a Francesco.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="condividi" class="sezione sezione-chiara">
+      <div class="wrap stretto">
+        <h2>Condividi</h2>
+        <p>Più persone vedono questa pagina, prima Francesco può partire.</p>
+        <div class="share">
+          <a class="btn btn-share btn-whatsapp" id="share-whatsapp" href="https://wa.me/" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          <a class="btn btn-share btn-facebook" id="share-facebook" href="https://www.facebook.com/sharer/sharer.php" target="_blank" rel="noopener noreferrer">Facebook</a>
+          <button type="button" class="btn btn-share btn-link" id="share-copia">Copia link</button>
+          <button type="button" class="btn btn-share btn-nativo" id="share-nativo" hidden>Altro…</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap stretto">
+      <p>Raccolta organizzata da Federico Solinas.</p>
+      <p>Per domande o informazioni: <span id="contatto" data-campo="contatto">[CONTATTO DA INSERIRE]</span></p>
+      <p class="piccolo">Questo sito non usa cookie né strumenti di tracciamento.</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
