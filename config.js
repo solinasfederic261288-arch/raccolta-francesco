@@ -6,6 +6,7 @@
      come "da inserire" finché non lo sostituisci con il dato vero.
    - Gli importi sono numeri SENZA virgolette e con il PUNTO per i decimali
      (es. 152.50, non "152,50").
+   Vale sia per la pagina italiana (index.html) sia per quella inglese (en/index.html).
    Istruzioni complete: COME-AGGIORNARE.md
    ========================================================================== */
 window.CONFIG = {
@@ -13,7 +14,7 @@ window.CONFIG = {
   /* ---- AVANZAMENTO RACCOLTA --------------------------------------------- */
   raccolto: 0,            // euro raccolti finora  (es. 152.50)
   obiettivo: 754,         // obiettivo in euro: viaggio a Firenze di Francesco e famiglia
-  aggiornatoIl: "",       // data dell'ultimo aggiornamento, es. "12 ottobre 2026" ("" = non mostrare)
+  aggiornatoIl: "",       // data ultimo aggiornamento, meglio come "2026-10-12" (tradotta da sola in IT/EN; "" = non mostrare)
 
   /* ---- COME DONARE: DATI COMUNI AI DUE CONTI ---------------------------- */
   intestatario: "Federico Solinas",
@@ -30,7 +31,7 @@ window.CONFIG = {
 
   /* ---- TRASPARENZA: RICEVUTA DEL BONIFICO A FRANCESCO ------------------- */
   ricevutaPubblicata: false,   // metti true dopo aver caricato images/ricevuta.jpg
-  ricevutaData: "",            // es. "20 ottobre 2026"
+  ricevutaData: "",            // es. "2026-10-20" (formato AAAA-MM-GG, tradotto da solo in IT/EN)
   ricevutaImporto: null,       // es. 754  (null = non mostrare l'importo)
 
   /* ---- CONTATTI (footer) ------------------------------------------------ */

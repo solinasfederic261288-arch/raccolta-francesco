@@ -1,8 +1,56 @@
-/* Logica della pagina. Non serve modificare questo file: i dati sono in config.js */
+/* Logica della pagina. Non serve modificare questo file: i dati sono in config.js
+   La lingua si legge da <html lang="..."> : "it" (pagina principale) oppure "en" (pagina /en/). */
 (function () {
   "use strict";
   var C = window.CONFIG || {};
   var $ = function (id) { return document.getElementById(id); };
+  var EN = /^en\b/i.test(document.documentElement.lang || "");
+
+  // Cartella dove si trova app.js (radice del sito): serve per trovare le immagini anche da /en/
+  var BASE = (document.currentScript && document.currentScript.src) ? new URL(".", document.currentScript.src).href : "";
+
+  /* ---------- Testi nelle due lingue ---------- */
+  var T = EN ? {
+    locale: "en-IE",
+    mancano: function (x) { return x + " to go"; },
+    raggiunto: "goal reached, thank you so much!",
+    aggiornato: " · updated ",
+    raccoltiSu: " raised of ",
+    titoloBanca: function (b) { return "Bank transfer – " + b + " account"; },
+    ibanMancante: "The IBAN hasn't been added yet.",
+    causaleMancante: "The payment reference hasn't been added yet.",
+    ibanCopiato: "IBAN copied to clipboard",
+    causaleCopiata: "Reference copied to clipboard",
+    linkCopiato: "Link copied to clipboard",
+    copiaFallita: "Couldn't copy: please select the text and copy it manually.",
+    ricevuta: "Receipt of the bank transfer to Francesco",
+    ricevutaDi: " for ",
+    ricevutaDel: " dated ",
+    ricevutaTocca: ". Tap the image to enlarge it.",
+    shareTitolo: "Help Francesco get to Florence",
+    shareTesto: function (x) { return "Francesco is 19 and has to go to Florence for treatment. We're raising " + x + " for his trip: even a small donation or a share helps."; },
+    ph: { intestatario: "[ACCOUNT HOLDER TO BE ADDED]", iban: "[IBAN TO BE ADDED]", ibanRevolut: "[REVOLUT IBAN TO BE ADDED]", causale: "[REFERENCE TO BE ADDED]", contatto: "[CONTACT TO BE ADDED]" }
+  } : {
+    locale: "it-IT",
+    mancano: function (x) { return "mancano " + x; },
+    raggiunto: "obiettivo raggiunto, grazie di cuore!",
+    aggiornato: " · aggiornato il ",
+    raccoltiSu: " raccolti su ",
+    titoloBanca: function (b) { return "Bonifico sul conto " + b; },
+    ibanMancante: "L'IBAN non è ancora stato inserito.",
+    causaleMancante: "La causale non è ancora stata inserita.",
+    ibanCopiato: "IBAN copiato negli appunti",
+    causaleCopiata: "Causale copiata negli appunti",
+    linkCopiato: "Link copiato negli appunti",
+    copiaFallita: "Copia non riuscita: seleziona il testo e copialo a mano.",
+    ricevuta: "Ricevuta del bonifico a Francesco",
+    ricevutaDi: " di ",
+    ricevutaDel: " del ",
+    ricevutaTocca: ". Tocca l'immagine per ingrandirla.",
+    shareTitolo: "Aiutiamo Francesco ad arrivare a Firenze",
+    shareTesto: function (x) { return "Francesco ha 19 anni e deve andare a Firenze per curarsi. Stiamo raccogliendo " + x + " per il suo viaggio: anche una piccola donazione o una condivisione aiuta."; },
+    ph: { intestatario: "[INTESTATARIO DA INSERIRE]", iban: "[IBAN DA INSERIRE]", ibanRevolut: "[IBAN REVOLUT DA INSERIRE]", causale: "[CAUSALE DA INSERIRE]", contatto: "[CONTATTO DA INSERIRE]" }
+  };
 
   function isPlaceholder(v) {
     return typeof v !== "string" || v.trim() === "" || v.trim().charAt(0) === "[";
@@ -13,10 +61,18 @@
   }
   function euro(n) {
     var dec = Math.round(n * 100) % 100 !== 0;
-    return new Intl.NumberFormat("it-IT", {
+    return new Intl.NumberFormat(T.locale, {
       style: "currency", currency: "EUR",
       minimumFractionDigits: dec ? 2 : 0, maximumFractionDigits: dec ? 2 : 0
     }).format(n);
+  }
+  // Date: se scritte come "AAAA-MM-GG" (es. "2026-10-12") vengono tradotte in automatico
+  // ("12 ottobre 2026" / "12 October 2026"); altrimenti vengono mostrate così come sono.
+  function data(v) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(v).trim());
+    if (!m) return String(v);
+    var d = new Date(Date.UTC(+m[1], +m[2] - 1, +m[3]));
+    return new Intl.DateTimeFormat(T.locale, { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(d);
   }
 
   /* ---------- Toast ---------- */
@@ -41,7 +97,7 @@
       var ok = false;
       try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
       document.body.removeChild(ta);
-      toast(ok ? msgOk : "Copia non riuscita: seleziona il testo e copialo a mano.");
+      toast(ok ? msgOk : T.copiaFallita);
     }
     if (navigator.clipboard && window.isSecureContext) {
       navigator.clipboard.writeText(testo).then(function () { toast(msgOk); }, fallback);
@@ -59,34 +115,28 @@
   $("raccolto").textContent = euro(raccolto);
   $("obiettivo").textContent = euro(obiettivo);
   $("percentuale").textContent = perc + "%";
-  $("mancano").textContent = mancano > 0 ? "mancano " + euro(mancano) : "obiettivo raggiunto, grazie di cuore!";
-  if (C.aggiornatoIl) $("aggiornato").textContent = " · aggiornato il " + C.aggiornatoIl;
+  $("mancano").textContent = mancano > 0 ? T.mancano(euro(mancano)) : T.raggiunto;
+  if (C.aggiornatoIl) $("aggiornato").textContent = T.aggiornato + data(C.aggiornatoIl);
   var barra = $("barra");
   barra.setAttribute("aria-valuemax", String(obiettivo));
   barra.setAttribute("aria-valuenow", String(Math.min(raccolto, obiettivo)));
-  barra.setAttribute("aria-valuetext", euro(raccolto) + " raccolti su " + euro(obiettivo));
+  barra.setAttribute("aria-valuetext", euro(raccolto) + T.raccoltiSu + euro(obiettivo));
   if (mancano === 0) document.querySelector(".progresso").classList.add("completo");
   requestAnimationFrame(function () {
     $("barra-riempimento").style.width = (raccolto > 0 ? Math.max(perc, 2) : 0) + "%";
   });
 
   /* ---------- Dati per donare / contatti ---------- */
-  function riempi(id, valore) {
-    var el = $(id);
-    if (!el) return;
-    el.textContent = valore;
-    el.classList.toggle("placeholder", isPlaceholder(valore));
-  }
   function ibanCompatto(v) { return String(v).replace(/\s+/g, "").toUpperCase(); }
   // IBAN mostrato a gruppi di 4 caratteri; i pulsanti "Copia IBAN" copiano sempre senza spazi
   function ibanLeggibile(v) { return ibanCompatto(v).replace(/(.{4})(?=.)/g, "$1 "); }
 
   var valori = {
-    intestatario: C.intestatario || "[INTESTATARIO DA INSERIRE]",
-    iban: C.iban || "[IBAN DA INSERIRE]",
-    ibanRevolut: C.ibanRevolut || "[IBAN REVOLUT DA INSERIRE]",
-    causale: C.causale || "[CAUSALE DA INSERIRE]",
-    contatto: C.contatto || "[CONTATTO DA INSERIRE]"
+    intestatario: C.intestatario || T.ph.intestatario,
+    iban: C.iban || T.ph.iban,
+    ibanRevolut: C.ibanRevolut || T.ph.ibanRevolut,
+    causale: C.causale || T.ph.causale,
+    contatto: C.contatto || T.ph.contatto
   };
   Array.prototype.forEach.call(document.querySelectorAll("[data-campo]"), function (el) {
     var k = el.getAttribute("data-campo"), v = valori[k];
@@ -97,7 +147,7 @@
   });
 
   // Nome della banca nel titolo del primo riquadro (facoltativo)
-  if (C.banca && !isPlaceholder(C.banca)) $("titolo-banca").textContent = "Bonifico sul conto " + C.banca;
+  if (C.banca && !isPlaceholder(C.banca)) $("titolo-banca").textContent = T.titoloBanca(C.banca);
 
   // Contatto cliccabile se è un'email o un numero di telefono
   if (!isPlaceholder(C.contatto)) {
@@ -116,11 +166,11 @@
     btn.addEventListener("click", function () {
       var k = btn.getAttribute("data-copia"), v = valori[k];
       if (k === "causale") {
-        if (isPlaceholder(v)) { toast("La causale non è ancora stata inserita."); return; }
-        copia(v.trim(), "Causale copiata negli appunti");
+        if (isPlaceholder(v)) { toast(T.causaleMancante); return; }
+        copia(v.trim(), T.causaleCopiata);
       } else {
-        if (isPlaceholder(v)) { toast("L'IBAN non è ancora stato inserito."); return; }
-        copia(ibanCompatto(v), "IBAN copiato negli appunti");
+        if (isPlaceholder(v)) { toast(T.ibanMancante); return; }
+        copia(ibanCompatto(v), T.ibanCopiato);
       }
     });
   });
@@ -134,7 +184,7 @@
     rl.hidden = false;
   }
 
-  /* ---------- Immagini (caricate solo se il file esiste) ---------- */
+  /* ---------- Ricevuta (caricata solo se il file esiste) ---------- */
   function caricaImmagine(src, onOk) {
     var img = new Image();
     img.onload = function () { if (img.naturalWidth > 0) onOk(img); };
@@ -142,36 +192,41 @@
   }
 
   if (C.ricevutaPubblicata === true) {
-    caricaImmagine("images/ricevuta.jpg", function (img) {
-      var testo = "Ricevuta del bonifico a Francesco";
-      if (C.ricevutaImporto != null && num(C.ricevutaImporto, null) != null) testo += " di " + euro(num(C.ricevutaImporto, 0));
-      if (C.ricevutaData) testo += " del " + C.ricevutaData;
+    var srcRicevuta = BASE + "images/ricevuta.jpg";
+    caricaImmagine(srcRicevuta, function (img) {
+      var testo = T.ricevuta;
+      if (C.ricevutaImporto != null && num(C.ricevutaImporto, null) != null) testo += T.ricevutaDi + euro(num(C.ricevutaImporto, 0));
+      if (C.ricevutaData) testo += T.ricevutaDel + data(C.ricevutaData);
       img.alt = testo;
       var fig = document.createElement("figure");
       var link = document.createElement("a");
-      link.href = "images/ricevuta.jpg"; link.target = "_blank"; link.rel = "noopener";
+      link.href = srcRicevuta; link.target = "_blank"; link.rel = "noopener";
       link.appendChild(img);
       var cap = document.createElement("figcaption");
-      cap.textContent = testo + ". Tocca l'immagine per ingrandirla.";
+      cap.textContent = testo + T.ricevutaTocca;
       fig.appendChild(link); fig.appendChild(cap);
       var box = $("ricevuta"); box.innerHTML = ""; box.appendChild(fig);
     });
   }
 
   /* ---------- Condivisione ---------- */
-  var url = (C.urlPagina && C.urlPagina.trim()) || location.href.split("#")[0];
-  var titolo = "Aiutiamo Francesco ad arrivare a Firenze";
-  var messaggio = "Francesco ha 19 anni e deve andare a Firenze per curarsi. Stiamo raccogliendo " + euro(obiettivo) + " per il suo viaggio: anche una piccola donazione o una condivisione aiuta.";
+  // La pagina inglese condivide l'indirizzo .../en/ (ricavato da urlPagina)
+  var url = location.href.split("#")[0];
+  if (C.urlPagina && C.urlPagina.trim()) {
+    url = C.urlPagina.trim();
+    if (EN) { try { url = new URL("en/", url.replace(/\/?$/, "/")).href; } catch (e) { /* lascia url */ } }
+  }
+  var messaggio = T.shareTesto(euro(obiettivo));
 
   $("share-whatsapp").href = "https://wa.me/?text=" + encodeURIComponent(messaggio + " " + url);
   $("share-facebook").href = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url);
-  $("share-copia").addEventListener("click", function () { copia(url, "Link copiato negli appunti"); });
+  $("share-copia").addEventListener("click", function () { copia(url, T.linkCopiato); });
 
   if (navigator.share) {
     var nat = $("share-nativo");
     nat.hidden = false;
     nat.addEventListener("click", function () {
-      navigator.share({ title: titolo, text: messaggio, url: url }).catch(function () {});
+      navigator.share({ title: T.shareTitolo, text: messaggio, url: url }).catch(function () {});
     });
   }
 })();

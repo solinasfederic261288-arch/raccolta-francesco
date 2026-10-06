@@ -56,6 +56,13 @@ p { margin: 0 0 1rem; }
 .hero-titolo h1 { margin-bottom: 0; }
 .foto { grid-area: foto; }
 .hero-corpo { grid-area: corpo; }
+.hero-top { display: flex; align-items: center; justify-content: space-between; gap: .4rem; margin-bottom: .5rem; }
+.hero-top .eyebrow { margin-bottom: 0; }
+.lingua { display: flex; align-items: center; gap: 0; font-size: .8rem; line-height: 1; font-weight: 700; flex-shrink: 0; color: var(--testo-tenue); }
+.lingua a { display: inline-flex; align-items: center; justify-content: center; min-width: 1.75rem; min-height: 1.6rem; padding: 0 .3rem; border-radius: 6px; text-decoration: none; color: var(--primario); }
+.lingua a:hover { background: rgba(29, 90, 102, .1); }
+.lingua span { padding: 0 .1rem; opacity: .6; }
+.lingua a[aria-current="page"] { background: var(--primario); color: #fff; }
 .eyebrow { text-transform: uppercase; letter-spacing: .08em; font-size: .78rem; font-weight: 700; color: var(--primario); margin-bottom: .5rem; }
 .lead { font-size: 1.1rem; color: var(--testo-tenue); margin-bottom: 1.1rem; }
 
@@ -176,3 +183,8 @@ p { margin: 0 0 1rem; }
   .sezione { padding: 3.5rem 0; }
   .share { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
 }
+
+/* Nota informativa (pagina inglese: causale e bonifico SEPA) */
+.nota-info { background: #eef5f5; border: 1px solid #cfe1e1; border-radius: var(--raggio); padding: .9rem 1rem; font-size: .95rem; }
+.nota-info p { margin: 0 0 .5rem; }
+.nota-info p:last-child { margin-bottom: 0; }

@@ -5,7 +5,8 @@ Per vederlo basta aprire `index.html` con il browser (anche dal computer, senza 
 
 ```
 raccolta-francesco/
-├── index.html          ← la pagina (testi della storia)
+├── index.html          ← la pagina italiana (testi della storia)
+├── en/index.html       ← la versione inglese (stessi dati, testi in inglese)
 ├── config.js           ← ★ I DATI DA AGGIORNARE: importi, IBAN, Revolut, ricevuta, contatti
 ├── styles.css          ← grafica
 ├── app.js              ← logica (non serve toccarlo)
@@ -56,7 +57,7 @@ revolutLink: "",                       // facoltativo, vedi sotto
 ```js
 raccolto: 0,              // → es. 152.50
 obiettivo: 754,           // non serve cambiarlo
-aggiornatoIl: "",         // → es. "12 ottobre 2026"
+aggiornatoIl: "",         // → es. "2026-10-12"
 ```
 
 - Usa il **punto** per i decimali (`152.50`, non `152,50`) e **niente virgolette** attorno al numero.
@@ -74,7 +75,7 @@ aggiornatoIl: "",         // → es. "12 ottobre 2026"
 4. In `config.js`:
    ```js
    ricevutaPubblicata: true,
-   ricevutaData: "20 ottobre 2026",
+   ricevutaData: "2026-10-20",
    ricevutaImporto: 754,
    ```
 Finché `ricevutaPubblicata` è `false`, il sito mostra "Ricevuta del bonifico: in arrivo".
@@ -99,6 +100,19 @@ Il sito è pubblicato su GitHub Pages: **https://solinasfederic261288-arch.githu
   `solinasfederic261288-arch/raccolta-francesco` (anche dal sito github.com: apri il file → icona matita →
   "Commit changes"). Dopo circa 1–2 minuti la pagina online si aggiorna.
   Per la ricevuta: "Add file" → "Upload files" → carica `ricevuta.jpg` dentro la cartella `images/`.
+
+## 5b. Versione inglese (/en/)
+
+La pagina inglese è **https://solinasfederic261288-arch.github.io/raccolta-francesco/en/**
+(file `en/index.html`). In alto a destra di entrambe le pagine c'è il selettore **IT | EN**.
+
+- Usa gli **stessi** `config.js`, `app.js`, `styles.css` e `images/`: quando aggiorni `raccolto`,
+  la ricevuta o i dati dei conti, **si aggiornano tutte e due le pagine** con una sola modifica.
+- Le **date** (`aggiornatoIl`, `ricevutaData`) scrivile nel formato `AAAA-MM-GG` (es. `"2026-10-12"`):
+  il sito le mostra da solo come "12 ottobre 2026" in italiano e "12 October 2026" in inglese.
+  Se scrivi una data a parole (es. "12 ottobre 2026") appare così com'è anche nella pagina inglese.
+- La causale resta in italiano anche nella pagina inglese (viene spiegato che è il riferimento del bonifico).
+- Se cambi la storia in italiano (`index.html`), ricordati di aggiornare anche il testo in `en/index.html`.
 
 ## 6. Cambiare la foto o i testi
 
