@@ -14,7 +14,7 @@ window.CONFIG = {
   /* ---- AVANZAMENTO RACCOLTA --------------------------------------------- */
   raccolto: 200,            // euro raccolti finora  (es. 152.50)
   obiettivo: 754,         // obiettivo in euro: viaggio a Firenze di Francesco e famiglia
-  aggiornatoIl:2026-10-09",       // data ultimo aggiornamento, meglio come "2026-10-12" (tradotta da sola in IT/EN; "" = non mostrare)
+  aggiornatoIl:"2026-10-09",       // data ultimo aggiornamento, meglio come "2026-10-12" (tradotta da sola in IT/EN; "" = non mostrare)
 
   /* ---- COME DONARE: DATI COMUNI AI DUE CONTI ---------------------------- */
   intestatario: "Federico Solinas",
