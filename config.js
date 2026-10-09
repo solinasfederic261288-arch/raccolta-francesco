@@ -30,9 +30,9 @@ window.CONFIG = {
                                          // vuoto o segnaposto = il pulsante "Dona con Revolut" non compare
 
   /* ---- TRASPARENZA: RICEVUTA DEL BONIFICO A FRANCESCO ------------------- */
-  ricevutaPubblicata: false,   // metti true dopo aver caricato images/ricevuta.jpg
-  ricevutaData: "",            // es. "2026-10-20" (formato AAAA-MM-GG, tradotto da solo in IT/EN)
-  ricevutaImporto: null,       // es. 754  (null = non mostrare l'importo)
+  ricevutaPubblicata: true,   // metti true dopo aver caricato images/ricevuta.jpg
+  ricevutaData: "2026-10-09",            // es. "2026-10-20" (formato AAAA-MM-GG, tradotto da solo in IT/EN)
+  ricevutaImporto: 200,       // es. 754  (null = non mostrare l'importo)
 
   /* ---- CONTATTI (footer) ------------------------------------------------ */
   contatto: "solinas.federic261288@gmail.com",   // email (diventa un link mailto) oppure telefono
