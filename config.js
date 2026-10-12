@@ -12,11 +12,15 @@
 window.CONFIG = {
 
   /* ---- AVANZAMENTO RACCOLTA --------------------------------------------- */
-  raccolto: 200,            // euro raccolti finora  (es. 152.50)
+  raccolto: 200,          // euro raccolti finora  (es. 152.50)
   obiettivo: 754,         // obiettivo in euro: viaggio a Firenze di Francesco e famiglia
-  aggiornatoIl:"2026-10-09",       // data ultimo aggiornamento, meglio come "2026-10-12" (tradotta da sola in IT/EN; "" = non mostrare)
+  aggiornatoIl: "2026-10-09",   // data ultimo aggiornamento, meglio come "2026-10-12" (tradotta da sola in IT/EN; "" = non mostrare)
 
-  /* ---- COME DONARE: DATI COMUNI AI DUE CONTI ---------------------------- */
+  /* ---- BANNER "URGENTE" IN CIMA ALLA PAGINA ----------------------------- */
+  urgenza: true,          // true = mostra il banner (la cifra mancante si calcola da sola: obiettivo - raccolto)
+                          // il banner sparisce da solo quando l'obiettivo è raggiunto
+
+  /* ---- COME DONARE: DATI COMUNI ----------------------------------------- */
   intestatario: "Federico Solinas",
   causale: "Viaggio Francesco Firenze",
 
@@ -24,15 +28,33 @@ window.CONFIG = {
   banca: "Crédit Agricole",              // nome mostrato nel titolo ("" = titolo generico "Bonifico bancario")
   iban: "IT08B0623039041000043779380",   // con o senza spazi: il sito lo mostra a gruppi di 4
 
+  /* ---- REVOLUT DAL TELEFONO (primo metodo mostrato) --------------------- */
+  telefonoRevolut: "+39 327 623 1454",   // "" = nascondi il riquadro (il pulsante copia il numero senza spazi)
+
   /* ---- CONTO 2: REVOLUT ------------------------------------------------- */
   ibanRevolut: "LT223250045564603133",   // IBAN del conto Revolut ("" = nascondi il riquadro Revolut)
+  // Dati per bonifici da fuori area SEPA (tutti "" = nascondi il riquadrino)
+  bicRevolut: "REVOLT21",
+  bancaRevolut: "Revolut Bank UAB",
+  indirizzoBancaRevolut: "Konstitucijos ave. 21B, 08130 Vilnius, Lithuania",
+  bicCorrispondente: "CHASDEFX",
   revolutLink: "",                       // FACOLTATIVO: link revolut.me, es. "https://revolut.me/..."
                                          // vuoto o segnaposto = il pulsante "Dona con Revolut" non compare
 
-  /* ---- TRASPARENZA: RICEVUTA DEL BONIFICO A FRANCESCO ------------------- */
-  ricevutaPubblicata: true,   // metti true dopo aver caricato images/ricevuta.jpg
-  ricevutaData: "2026-10-09",            // es. "2026-10-20" (formato AAAA-MM-GG, tradotto da solo in IT/EN)
-  ricevutaImporto: 200,       // es. 754  (null = non mostrare l'importo)
+  /* ---- TRASPARENZA 1: CONFERMA DI DONAZIONI RICEVUTE -------------------- */
+  // Immagine: images/ricevuta.jpg  (prova che i soldi sono arrivati a Federico, NON il bonifico a Francesco)
+  ricevutaPubblicata: true,     // true = mostra images/ricevuta.jpg
+  ricevutaData: "2026-10-09",   // formato AAAA-MM-GG (tradotto da solo in IT/EN)
+  ricevutaImporto: 200,         // importo ricevuto mostrato nella didascalia (null = non mostrare)
+  // Didascalia della conferma (se vuota viene generata da data e importo)
+  ricevutaDidascalia: "Donazione ricevuta: 200 euro da Noi per Voi OdV, 9 ottobre 2026, contributo per viaggio Francesco",
+  ricevutaDidascaliaEn: "Donation received: €200 from Noi per Voi OdV, 9 October 2026, contribution towards Francesco's trip",
+
+  /* ---- TRASPARENZA 2: BONIFICO UNICO A FRANCESCO (a obiettivo raggiunto) - */
+  // Immagine: images/bonifico-francesco.jpg  (oscura IBAN e nomi dei familiari prima di caricarla!)
+  bonificoFinalePubblicato: false,   // true dopo aver fatto il bonifico e caricato l'immagine
+  bonificoFinaleData: "",            // es. "2026-10-30"
+  bonificoFinaleImporto: null,       // es. 754
 
   /* ---- CONTATTI (footer) ------------------------------------------------ */
   contatto: "solinas.federic261288@gmail.com",   // email (diventa un link mailto) oppure telefono

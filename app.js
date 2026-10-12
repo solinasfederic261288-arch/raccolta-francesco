@@ -23,10 +23,12 @@
     causaleCopiata: "Reference copied to clipboard",
     linkCopiato: "Link copied to clipboard",
     copiaFallita: "Couldn't copy: please select the text and copy it manually.",
-    ricevuta: "Receipt of the bank transfer to Francesco",
-    ricevutaDi: " for ",
-    ricevutaDel: " dated ",
-    ricevutaTocca: ". Tap the image to enlarge it.",
+    ricezione: function (imp, d) { return "Confirmation of donations received" + (imp ? ": " + imp + " received" : "") + (d ? " on " + d : "") + " (IBAN hidden). This is not the transfer to Francesco: that single transfer will be made once the goal is reached."; },
+    finale: function (imp, d) { return "Receipt of the single bank transfer to Francesco" + (imp ? " for " + imp : "") + (d ? ", dated " + d : "") + "."; },
+    ricevutaTocca: " Tap the image to enlarge it.",
+    numeroCopiato: "Number copied to clipboard",
+    bicCopiato: "BIC copied to clipboard",
+    datoMancante: "This detail hasn't been added yet.",
     shareTitolo: "Help Francesco get to Florence",
     shareTesto: function (x) { return "Francesco is 19 and has to go to Florence for treatment. We're raising " + x + " for his trip: even a small donation or a share helps."; },
     ph: { intestatario: "[ACCOUNT HOLDER TO BE ADDED]", iban: "[IBAN TO BE ADDED]", ibanRevolut: "[REVOLUT IBAN TO BE ADDED]", causale: "[REFERENCE TO BE ADDED]", contatto: "[CONTACT TO BE ADDED]" }
@@ -43,10 +45,12 @@
     causaleCopiata: "Causale copiata negli appunti",
     linkCopiato: "Link copiato negli appunti",
     copiaFallita: "Copia non riuscita: seleziona il testo e copialo a mano.",
-    ricevuta: "Ricevuta del bonifico a Francesco",
-    ricevutaDi: " di ",
-    ricevutaDel: " del ",
-    ricevutaTocca: ". Tocca l'immagine per ingrandirla.",
+    ricezione: function (imp, d) { return "Conferma di donazioni ricevute" + (imp ? ": " + imp + " ricevuti" : "") + (d ? " il " + d : "") + " (IBAN oscurato). Non è il bonifico a Francesco: quel bonifico unico arriverà quando l'obiettivo sarà raggiunto."; },
+    finale: function (imp, d) { return "Ricevuta del bonifico unico a Francesco" + (imp ? " di " + imp : "") + (d ? " del " + d : "") + "."; },
+    ricevutaTocca: " Tocca l'immagine per ingrandirla.",
+    numeroCopiato: "Numero copiato negli appunti",
+    bicCopiato: "BIC copiato negli appunti",
+    datoMancante: "Questo dato non è ancora stato inserito.",
     shareTitolo: "Aiutiamo Francesco ad arrivare a Firenze",
     shareTesto: function (x) { return "Francesco ha 19 anni e deve andare a Firenze per curarsi. Stiamo raccogliendo " + x + " per il suo viaggio: anche una piccola donazione o una condivisione aiuta."; },
     ph: { intestatario: "[INTESTATARIO DA INSERIRE]", iban: "[IBAN DA INSERIRE]", ibanRevolut: "[IBAN REVOLUT DA INSERIRE]", causale: "[CAUSALE DA INSERIRE]", contatto: "[CONTATTO DA INSERIRE]" }
@@ -122,6 +126,19 @@
   barra.setAttribute("aria-valuenow", String(Math.min(raccolto, obiettivo)));
   barra.setAttribute("aria-valuetext", euro(raccolto) + T.raccoltiSu + euro(obiettivo));
   if (mancano === 0) document.querySelector(".progresso").classList.add("completo");
+
+  // Banner "urgente": cifra mancante e numero di persone calcolati da obiettivo - raccolto
+  var banner = $("urgenza");
+  if (banner) {
+    if (C.urgenza === true && mancano > 0) {
+      Array.prototype.forEach.call(document.querySelectorAll("[data-mancano]"), function (el) { el.textContent = euro(mancano); });
+      Array.prototype.forEach.call(document.querySelectorAll("[data-persone]"), function (el) {
+        el.textContent = new Intl.NumberFormat(T.locale).format(Math.ceil(mancano));
+      });
+    } else {
+      banner.hidden = true;
+    }
+  }
   requestAnimationFrame(function () {
     $("barra-riempimento").style.width = (raccolto > 0 ? Math.max(perc, 2) : 0) + "%";
   });
@@ -136,7 +153,12 @@
     iban: C.iban || T.ph.iban,
     ibanRevolut: C.ibanRevolut || T.ph.ibanRevolut,
     causale: C.causale || T.ph.causale,
-    contatto: C.contatto || T.ph.contatto
+    contatto: C.contatto || T.ph.contatto,
+    telefonoRevolut: C.telefonoRevolut || "",
+    bicRevolut: C.bicRevolut || "",
+    bancaRevolut: C.bancaRevolut || "",
+    indirizzoBancaRevolut: C.indirizzoBancaRevolut || "",
+    bicCorrispondente: C.bicCorrispondente || ""
   };
   Array.prototype.forEach.call(document.querySelectorAll("[data-campo]"), function (el) {
     var k = el.getAttribute("data-campo"), v = valori[k];
@@ -168,6 +190,12 @@
       if (k === "causale") {
         if (isPlaceholder(v)) { toast(T.causaleMancante); return; }
         copia(v.trim(), T.causaleCopiata);
+      } else if (k === "telefonoRevolut") {
+        if (isPlaceholder(v)) { toast(T.datoMancante); return; }
+        copia(v.replace(/[^\d+]/g, ""), T.numeroCopiato);
+      } else if (k === "bicRevolut" || k === "bicCorrispondente") {
+        if (isPlaceholder(v)) { toast(T.datoMancante); return; }
+        copia(ibanCompatto(v), T.bicCopiato);
       } else {
         if (isPlaceholder(v)) { toast(T.ibanMancante); return; }
         copia(ibanCompatto(v), T.ibanCopiato);
@@ -177,6 +205,8 @@
 
   // Riquadro Revolut: nascosto se manca l'IBAN Revolut (ibanRevolut: "")
   if (C.ibanRevolut === "") $("card-revolut").hidden = true;
+  if (!C.telefonoRevolut) $("card-revolut-tel").hidden = true;
+  if (!C.bicRevolut && !C.bancaRevolut && !C.indirizzoBancaRevolut && !C.bicCorrispondente && $("extra-sepa")) $("extra-sepa").hidden = true;
   // Pulsante "Dona con Revolut": visibile solo con un link valido (vuoto o segnaposto = nascosto)
   if (typeof C.revolutLink === "string" && /^https:\/\/\S+$/.test(C.revolutLink.trim())) {
     var rl = $("revolut-link");
@@ -191,22 +221,33 @@
     img.src = src;
   }
 
-  if (C.ricevutaPubblicata === true) {
-    var srcRicevuta = BASE + "images/ricevuta.jpg";
-    caricaImmagine(srcRicevuta, function (img) {
-      var testo = T.ricevuta;
-      if (C.ricevutaImporto != null && num(C.ricevutaImporto, null) != null) testo += T.ricevutaDi + euro(num(C.ricevutaImporto, 0));
-      if (C.ricevutaData) testo += T.ricevutaDel + data(C.ricevutaData);
+  function mostraRicevuta(file, boxId, testo, onOk) {
+    var src = BASE + file;
+    caricaImmagine(src, function (img) {
       img.alt = testo;
       var fig = document.createElement("figure");
       var link = document.createElement("a");
-      link.href = srcRicevuta; link.target = "_blank"; link.rel = "noopener";
+      link.href = src; link.target = "_blank"; link.rel = "noopener";
       link.appendChild(img);
       var cap = document.createElement("figcaption");
-      cap.textContent = testo + T.ricevutaTocca;
+      cap.textContent = testo;
       fig.appendChild(link); fig.appendChild(cap);
-      var box = $("ricevuta"); box.innerHTML = ""; box.appendChild(fig);
+      var box = $(boxId); box.innerHTML = ""; box.appendChild(fig);
+      if (onOk) onOk();
     });
+  }
+  function importo(v) { return (v != null && num(v, null) != null) ? euro(num(v, 0)) : ""; }
+
+  // 1) Conferma di donazioni ricevute (NON è il bonifico a Francesco)
+  if (C.ricevutaPubblicata === true) {
+    mostraRicevuta("images/ricevuta.jpg", "ricezione",
+      ((EN ? C.ricevutaDidascaliaEn : C.ricevutaDidascalia) || T.ricezione(importo(C.ricevutaImporto), C.ricevutaData ? data(C.ricevutaData) : "")),
+      function () { $("blocco-ricezione").hidden = false; });
+  }
+  // 2) Bonifico unico a Francesco (a obiettivo raggiunto)
+  if (C.bonificoFinalePubblicato === true) {
+    mostraRicevuta("images/bonifico-francesco.jpg", "ricevuta",
+      T.finale(importo(C.bonificoFinaleImporto), C.bonificoFinaleData ? data(C.bonificoFinaleData) : ""));
   }
 
   /* ---------- Condivisione ---------- */

@@ -188,3 +188,25 @@ p { margin: 0 0 1rem; }
 .nota-info { background: #eef5f5; border: 1px solid #cfe1e1; border-radius: var(--raggio); padding: .9rem 1rem; font-size: .95rem; }
 .nota-info p { margin: 0 0 .5rem; }
 .nota-info p:last-child { margin-bottom: 0; }
+
+/* ---------- BANNER URGENTE ---------- */
+.urgenza { background: #8f2f1c; color: #fff; padding: .85rem 0; border-bottom: 4px solid var(--accento); }
+.urgenza-riga { display: flex; flex-wrap: wrap; align-items: center; gap: .65rem 1rem; }
+.urgenza p { margin: 0; flex: 1 1 260px; font-size: 1rem; line-height: 1.45; }
+.urgenza strong { color: #fff; }
+.btn-urgenza { background: #fff; color: #8f2f1c; min-height: 44px; padding: .5rem 1.2rem; flex: 0 0 auto; }
+.btn-urgenza:hover { background: var(--accento-tenue); color: #6e2414; }
+.urgenza :focus-visible { outline-color: #fff; }
+@media (max-width: 520px) { .btn-urgenza { width: 100%; } }
+
+/* ---------- METODI DI DONAZIONE ---------- */
+.card-evidenza { border: 2px solid var(--primario); background: #f1f7f7 !important; }
+.card p { margin-bottom: .75rem; }
+.extra-sepa { margin-top: 1.1rem; padding-top: 1rem; border-top: 1px dashed var(--bordo); }
+.extra-sepa h4 { margin: 0 0 .7rem; font-size: .95rem; color: var(--testo-tenue); }
+.extra-sepa .dati dd { font-weight: 600; }
+
+/* ---------- TRASPARENZA: due blocchi ---------- */
+.blocco-ricevuta { margin-top: 1.5rem; }
+.blocco-ricevuta h3 { font-size: 1.05rem; margin-bottom: .6rem; }
+.ricevuta img { max-height: 70vh; width: auto; }

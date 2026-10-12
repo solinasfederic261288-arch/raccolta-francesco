@@ -52,6 +52,21 @@ revolutLink: "",                       // facoltativo, vedi sotto
   nel tuo profilo). Comparirà il pulsante **"Dona con Revolut"** dentro il riquadro Revolut.
   Se è vuoto `""` (come ora) o non inizia con `https://`, il pulsante resta nascosto.
 
+## 1b. Revolut dal telefono, dati extra-SEPA, banner "Urgente"
+
+```js
+telefonoRevolut: "+39 327 623 1454",   // 1° metodo mostrato ("" = nascondi). "Copia numero" copia senza spazi
+bicRevolut: "REVOLT21",                // dati per bonifici da fuori area SEPA, nel riquadro Revolut
+bancaRevolut: "Revolut Bank UAB",
+indirizzoBancaRevolut: "Konstitucijos ave. 21B, 08130 Vilnius, Lithuania",
+bicCorrispondente: "CHASDEFX",
+urgenza: true,                         // banner rosso in cima
+```
+
+- Il banner "Urgente" calcola da solo quanto manca (`obiettivo - raccolto`) e il numero di
+  persone ("basterebbe 1 € da N persone"): **basta aggiornare `raccolto`**.
+  Sparisce da solo a obiettivo raggiunto, oppure con `urgenza: false`.
+
 ## 2. Aggiornare la cifra raccolta (ogni volta che arrivano donazioni)
 
 ```js
@@ -64,21 +79,28 @@ aggiornatoIl: "",         // → es. "2026-10-12"
 - La barra, la percentuale e "mancano … €" si aggiornano da sole.
   Quando `raccolto` arriva a 754 (o più) compare "obiettivo raggiunto, grazie di cuore!".
 
-## 3. Pubblicare la ricevuta del bonifico a Francesco
+## 3. Trasparenza: due tipi di ricevuta
 
-1. Fai lo screenshot o la foto della ricevuta del bonifico.
-2. **Prima di pubblicarla, oscura i dati sensibili**: l'IBAN di destinazione e,
-   soprattutto, **qualsiasi nome di familiare** di Francesco (la famiglia deve restare anonima).
-   Se il conto di destinazione è intestato a un familiare, quel nome va coperto.
-   Lascia visibili: importo, data, esito "eseguito", e il tuo nome come ordinante.
-3. Salvala come `images/ricevuta.jpg` (formato JPG, nome esatto, tutto minuscolo).
-4. In `config.js`:
-   ```js
-   ricevutaPubblicata: true,
-   ricevutaData: "2026-10-20",
-   ricevutaImporto: 754,
-   ```
-Finché `ricevutaPubblicata` è `false`, il sito mostra "Ricevuta del bonifico: in arrivo".
+**a) Conferma di donazioni ricevute** (es. l'estratto che mostra i 200 € arrivati sul tuo conto):
+file `images/ricevuta.jpg`, e in `config.js`:
+```js
+ricevutaPubblicata: true,
+ricevutaData: "2026-10-09",
+ricevutaImporto: 200,
+```
+La didascalia dice chiaramente che **non** è il bonifico a Francesco.
+
+**b) Bonifico unico a Francesco** (quando l'obiettivo è raggiunto): file `images/bonifico-francesco.jpg`, e:
+```js
+bonificoFinalePubblicato: true,
+bonificoFinaleData: "2026-10-30",
+bonificoFinaleImporto: 754,
+```
+Finché è `false`, il sito mostra "Non ancora effettuato".
+
+**Prima di caricare qualsiasi ricevuta, copri con un rettangolo nero pieno** (non sfocatura)
+gli IBAN e **ogni nome di familiare** di Francesco. Attenzione: un file caricato su GitHub resta
+nella cronologia del repository anche se poi lo sostituisci, quindi oscura **prima** del caricamento.
 
 ## 4. Contatti (footer)
 
