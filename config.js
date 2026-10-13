@@ -49,6 +49,9 @@ window.CONFIG = {
   // Didascalia della conferma (se vuota viene generata da data e importo)
   ricevutaDidascalia: "Donazione ricevuta: 200 euro da Noi per Voi OdV, 9 ottobre 2026, contributo per viaggio Francesco",
   ricevutaDidascaliaEn: "Donation received: €200 from Noi per Voi OdV, 9 October 2026, contribution towards Francesco's trip",
+  ricevutaDidascaliaHe: "תרומה שהתקבלה: 200 € מ־⁨Noi per Voi OdV⁩, 9 באוקטובר 2026, השתתפות בנסיעה של פרנצ'סקו",
+  ricevutaDidascaliaTr: "Gelen bağış: Noi per Voi OdV'den €200, 9 Ekim 2026, Francesco'nun yolculuğuna katkı",
+  ricevutaDidascaliaAr: "تبرع مستلم: 200 € من ⁨Noi per Voi OdV⁩، 9 أكتوبر 2026، مساهمة في رحلة فرانشيسكو",
 
   /* ---- TRASPARENZA 2: BONIFICO UNICO A FRANCESCO (a obiettivo raggiunto) - */
   // Immagine: images/bonifico-francesco.jpg  (oscura IBAN e nomi dei familiari prima di caricarla!)

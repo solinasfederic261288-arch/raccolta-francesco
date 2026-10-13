@@ -37,8 +37,8 @@ a:hover { color: var(--primario-scuro); }
 :focus-visible { outline: 3px solid var(--accento); outline-offset: 3px; border-radius: 4px; }
 
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
-.skip { position: absolute; left: -999px; top: 0; background: var(--primario); color: #fff; padding: .6rem 1rem; z-index: 10; }
-.skip:focus { left: .5rem; top: .5rem; }
+.skip { position: absolute; inset-inline-start: .5rem; top: 0; transform: translateY(-150%); background: var(--primario); color: #fff; padding: .6rem 1rem; z-index: 10; }
+.skip:focus { transform: translateY(.5rem); }
 
 .wrap { width: 100%; max-width: 1080px; margin: 0 auto; padding: 0 1.25rem; }
 .stretto { max-width: 680px; }
@@ -210,3 +210,21 @@ p { margin: 0 0 1rem; }
 .blocco-ricevuta { margin-top: 1.5rem; }
 .blocco-ricevuta h3 { font-size: 1.05rem; margin-bottom: .6rem; }
 .ricevuta img { max-height: 70vh; width: auto; }
+
+/* ---------- SELETTORE LINGUA (5 lingue) ---------- */
+.hero-top { flex-wrap: wrap; }
+.hero-top .lingua { order: -1; margin-inline-start: auto; }
+.hero-top .eyebrow { flex-basis: 100%; }
+
+/* ---------- DATI SEMPRE DA SINISTRA A DESTRA (IBAN, BIC, telefono, email...) ---------- */
+.iban, [dir="ltr"] { direction: ltr; unicode-bidi: isolate; }
+
+/* ---------- PAGINE DA DESTRA A SINISTRA (ebraico, arabo) ---------- */
+[dir="rtl"] .passi li { padding: .2rem 3rem 1rem 0; }
+[dir="rtl"] .passi li::before { left: auto; right: 0; }
+[dir="rtl"] .passi li:not(:last-child)::after { left: auto; right: 1.02rem; }
+[dir="rtl"] .evidenza { border-left: 0; border-right: 5px solid var(--accento); border-radius: 10px 0 0 10px; }
+:lang(he) .eyebrow, :lang(ar) .eyebrow, :lang(he) .dati dt, :lang(ar) .dati dt { letter-spacing: 0; text-transform: none; }
+:lang(ar) body, :lang(ar) h1, :lang(ar) h2 { font-family: "Noto Sans Arabic", "Segoe UI", Tahoma, system-ui, sans-serif; }
+:lang(he) h1, :lang(he) h2 { font-family: "Noto Sans Hebrew", "Segoe UI", Arial, system-ui, sans-serif; }
+:lang(ar) h1, :lang(he) h1 { letter-spacing: 0; }

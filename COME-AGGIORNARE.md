@@ -136,6 +136,18 @@ La pagina inglese è **https://solinasfederic261288-arch.github.io/raccolta-fran
 - La causale resta in italiano anche nella pagina inglese (viene spiegato che è il riferimento del bonifico).
 - Se cambi la storia in italiano (`index.html`), ricordati di aggiornare anche il testo in `en/index.html`.
 
+## 5c. Ebraico (/he/), turco (/tr/), arabo (/ar/)
+
+- Pagine: `he/index.html`, `tr/index.html`, `ar/index.html` (ebraico e arabo da destra a sinistra).
+  Selettore **IT | EN | HE | TR | AR** su tutte le pagine.
+- Usano gli stessi `config.js`, `app.js`, `styles.css` e immagini: `raccolto`, ricevute e dati dei conti
+  si aggiornano ovunque con una sola modifica.
+- Didascalia della conferma ricevuta per lingua: `ricevutaDidascaliaHe`, `ricevutaDidascaliaTr`, `ricevutaDidascaliaAr` in `config.js`.
+- In queste pagine il banner non dice "1 € da N persone" (bonifici internazionali con possibili commissioni)
+  e il conto Revolut con BIC/SWIFT è mostrato prima di Crédit Agricole.
+- Se cambi i testi della pagina inglese, le tre pagine si rigenerano con lo script
+  `/workspace/raccolta-francesco-backup/genera_lingue.py` (fuori dal sito, contiene le traduzioni).
+
 ## 6. Cambiare la foto o i testi
 
 - **Foto**: sostituisci `images/francesco.jpg` con un'altra immagine con lo stesso nome
