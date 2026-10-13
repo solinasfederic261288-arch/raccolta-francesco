@@ -53,6 +53,14 @@ window.CONFIG = {
   ricevutaDidascaliaTr: "Gelen bağış: Noi per Voi OdV'den €200, 9 Ekim 2026, Francesco'nun yolculuğuna katkı",
   ricevutaDidascaliaAr: "تبرع مستلم: 200 € من ⁨Noi per Voi OdV⁩، 9 أكتوبر 2026، مساهمة في رحلة فرانشيسكو",
 
+  // Ricevuta firmata da Federico per Noi per Voi OdV (images/ricevuta-firmata.jpg)
+  ricevutaFirmataPubblicata: true,
+  ricevutaFirmataDidascalia: "Ricevuta firmata da Federico per Noi per Voi OdV, 13 ottobre 2026, con un ringraziamento scritto a mano",
+  ricevutaFirmataDidascaliaEn: "Receipt signed by Federico for Noi per Voi OdV, 13 October 2026, with a handwritten thank-you note",
+  ricevutaFirmataDidascaliaHe: "קבלה חתומה על ידי פדריקו עבור ⁨Noi per Voi OdV⁩, 13 באוקטובר 2026, עם מכתב תודה בכתב יד",
+  ricevutaFirmataDidascaliaTr: "Federico'nun Noi per Voi OdV için imzaladığı makbuz, 13 Ekim 2026, el yazısı teşekkür notuyla",
+  ricevutaFirmataDidascaliaAr: "إيصال موقّع من فيديريكو لصالح ⁨Noi per Voi OdV⁩، 13 أكتوبر 2026، مع رسالة شكر بخط اليد",
+
   /* ---- TRASPARENZA 2: BONIFICO UNICO A FRANCESCO (a obiettivo raggiunto) - */
   // Immagine: images/bonifico-francesco.jpg  (oscura IBAN e nomi dei familiari prima di caricarla!)
   bonificoFinalePubblicato: false,   // true dopo aver fatto il bonifico e caricato l'immagine

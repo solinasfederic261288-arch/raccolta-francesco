@@ -318,6 +318,13 @@
     mostraRicevuta("images/ricevuta.jpg", "ricezione",
       (C["ricevutaDidascalia" + SUFFISSO] || T.ricezione(importo(C.ricevutaImporto), C.ricevutaData ? data(C.ricevutaData) : "")),
       function () { $("blocco-ricezione").hidden = false; });
+    if (C.ricevutaFirmataPubblicata === true) {
+      var box2 = document.createElement("div");
+      box2.className = "ricevuta"; box2.id = "ricezione-firmata";
+      $("ricezione").parentNode.appendChild(box2);
+      mostraRicevuta("images/ricevuta-firmata.jpg", "ricezione-firmata",
+        (C["ricevutaFirmataDidascalia" + SUFFISSO] || C.ricevutaFirmataDidascalia || ""));
+    }
   }
   // 2) Bonifico unico a Francesco (a obiettivo raggiunto)
   if (C.bonificoFinalePubblicato === true) {
