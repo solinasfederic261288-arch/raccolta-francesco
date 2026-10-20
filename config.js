@@ -18,6 +18,8 @@ window.CONFIG = {
 
   // Donazioni ricevute: Noi per Voi OdV 200 € (9/10/2026); Associazione Chiara Paradiso "La forza dell'amore" 554 € (20/10/2026). Totale 754 €.
 
+  donazioniChiuse: true,  // true = obiettivo raggiunto: nasconde i pulsanti "Dona ora" e la sezione "Come donare"
+
   /* ---- BANNER "URGENTE" IN CIMA ALLA PAGINA ----------------------------- */
   urgenza: false,         // true = mostra il banner (la cifra mancante si calcola da sola: obiettivo - raccolto)
                           // il banner sparisce da solo quando l'obiettivo è raggiunto

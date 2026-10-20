@@ -185,6 +185,13 @@
     }
   }
 
+  /* ---------- Donazioni chiuse (obiettivo raggiunto) ---------- */
+  if (C.donazioniChiuse === true) {
+    var sezDona = $("dona");
+    if (sezDona) sezDona.hidden = true;
+    Array.prototype.forEach.call(document.querySelectorAll('a.btn[href="#dona"]'), function (el) { el.hidden = true; });
+  }
+
   /* ---------- Avanzamento ---------- */
   var obiettivo = num(C.obiettivo, 754) || 754;
   var raccolto = num(C.raccolto, 0);
