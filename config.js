@@ -14,7 +14,7 @@ window.CONFIG = {
   /* ---- AVANZAMENTO RACCOLTA --------------------------------------------- */
   raccolto: 754,          // euro raccolti finora  (es. 152.50)
   obiettivo: 754,         // obiettivo in euro: viaggio a Firenze di Francesco e famiglia
-  aggiornatoIl: "2026-10-20",   // data ultimo aggiornamento, meglio come "2026-10-12" (tradotta da sola in IT/EN; "" = non mostrare)
+  aggiornatoIl: "2026-10-28",   // data ultimo aggiornamento, meglio come "2026-10-12" (tradotta da sola in IT/EN; "" = non mostrare)
 
   // Donazioni ricevute: Noi per Voi OdV 200 € (9/10/2026); Associazione Chiara Paradiso "La forza dell'amore" 554 € (20/10/2026). Totale 754 €.
 
@@ -67,9 +67,9 @@ window.CONFIG = {
 
   /* ---- TRASPARENZA 2: BONIFICO UNICO A FRANCESCO (a obiettivo raggiunto) - */
   // Immagine: images/bonifico-francesco.jpg  (oscura IBAN e nomi dei familiari prima di caricarla!)
-  bonificoFinalePubblicato: false,   // true dopo aver fatto il bonifico e caricato l'immagine
-  bonificoFinaleData: "",            // es. "2026-10-30"
-  bonificoFinaleImporto: null,       // es. 754
+  bonificoFinalePubblicato: true,    // true dopo aver fatto il bonifico e caricato l'immagine
+  bonificoFinaleData: "2026-10-26",  // es. "2026-10-30"
+  bonificoFinaleImporto: 750,        // es. 754
 
   /* ---- CONTATTI (footer) ------------------------------------------------ */
   contatto: "solinas.federic261288@gmail.com",   // email (diventa un link mailto) oppure telefono
